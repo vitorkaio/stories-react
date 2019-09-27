@@ -1,0 +1,35 @@
+import { filter, mergeMap } from 'rxjs/operators';
+import * as typeActions from './typeActions';
+import * as countriesActions from './actions';
+import UnsplashService from 'services/unplashService.js'
+import { listCountries } from './models/constants'
+import Country from './models/country.model'
+
+// ***************************** READ Countries *****************************
+
+export const countryEpic = (action$, _) => action$.pipe(
+  filter(action => action.type === typeActions.COUNTRIES_REQUEST),
+  // `mergeMap()` supports functions that return promises, as well as observables
+  mergeMap(async (_) => {
+    try {
+      const unsplashService = UnsplashService()
+      // const countries = await unsplashService.getImages('costa rica')
+      const countries = []
+      for (let item in listCountries) {
+        const country = Country()
+        const res = await unsplashService.getImages(listCountries[item])
+        const subrt = Math.floor(Math.random() * 4) + 2 
+
+        country.setNameCountry(listCountries[item])
+        country.setListImgs(res.splice(0, subrt))
+        country.setTotal(country.getListImgs().length)
+
+        countries.push(country)
+      }
+      return countriesActions.countriesSuccess([...countries]);
+    } 
+    catch (_) {
+      return countriesActions.countriesFail()
+    }
+  }),
+);
