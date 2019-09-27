@@ -16,6 +16,8 @@ const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry 
 
   const { load, fail, countries, selectedCountry } = countriesReducer
 
+  // console.log(test)
+
   const selectCountryHandler = (index) => {
     selectCountry(index)
   }
@@ -23,6 +25,12 @@ const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry 
   const resetSelectCountryHandler = () => {
     resetCountry()
   }
+
+  /* if (selectedCountry) {
+    const country = countries[selectedCountry]
+    console.log(`cont: ${country.getCont()}\nindex: ${country.getIndexCountry()}\ntimer: ${country.getTimer()}
+    \ntotal: ${country.getTotal()}`) 
+  } */
 
   return (
     <Container>
@@ -40,7 +48,7 @@ const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry 
         null 
         : 
         <>
-          <StorieModal country={countries[selectedCountry]} />
+          <StorieModal country={countries[selectedCountry]} close={resetSelectCountryHandler} />
           <BackDrop show={true} closeDrawer={resetSelectCountryHandler} />
         </>
       }

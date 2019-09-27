@@ -5,7 +5,7 @@ export default function Country() {
   let id = Date.now() + Math.random() + "stories";
   let nameCountry = '' // nome do país
   let listImgs = [] // lista de imagens do país
-  let timer = 15 // tempo max do timer
+  let timer = 10 // tempo max do timer
   let cont = 0 // quando for igual ao timer muda de imagem
   let indexCountry = 0 // indica qual imagem do array será mostrada
   let total = 0 // total de imagens

@@ -4,6 +4,8 @@ import * as countriesActions from './actions';
 import UnsplashService from 'services/unplashService.js'
 import { listCountries } from './models/constants'
 import Country from './models/country.model'
+import stores from 'store/store';
+import Control from './models/control.model';
 
 // ***************************** READ Countries *****************************
 
@@ -33,3 +35,19 @@ export const countryEpic = (action$, _) => action$.pipe(
     }
   }),
 );
+
+
+// ***************************** START CONTROL *****************************
+export const selectCountryEpic = (action$, _) => action$.pipe(
+  filter(action => action.type === typeActions.SELECT_COUNTRY),
+  // `mergeMap()` supports functions that return promises, as well as observables
+  mergeMap(async (action) => {
+    const { payload } = action
+    const country = stores.getState().countriesReducer.countries[payload.index]
+    Control.startInterval(country)
+
+
+    return countriesActions.selectCountrySuccess(payload.index)
+  }),
+);
+

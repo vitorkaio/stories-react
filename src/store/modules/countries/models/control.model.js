@@ -1,25 +1,43 @@
 // Gerencia os interval
-import { produce } from 'immer';
 import Interval from './interval.model'
+import stores from 'store/store';
+import * as countriesActions from 'store/modules/countries/actions'
 
-export default function Control() {
 
-  const intervals = []
+const Control = () => {
 
-  const startInterval = (country) => {
-    const intervalId = setInterval(() => {
-      console.log(country.getNameCountry())
-    }, 1e3)
-    const interval = Interval(country.getId(), intervalId)
-    intervals.push(interval)
+  let interval = null
+
+  const finishInterval = () => {
+    const index = stores.getState().countriesReducer.selectedCountry
+    if (index === null) {
+      stopInterval()
+      return true
+    }
+    return false
   }
 
-  const stopInterval = (id) => {
-    const index = intervals.findIndex(item => item.id === id)
-    if (index !== -1) {
-      clearInterval(intervals[index].intervalId)
-      intervals.splice(index, 1)
-    }
+  const startInterval = () => {
+    const intervalId = setInterval(() => {
+
+      // Verifica se fechou
+      if(!finishInterval()) {
+        const index = stores.getState().countriesReducer.selectedCountry
+        /* const country = stores.getState().countriesReducer.countries[index]
+        console.log(`cont: ${country.getCont()}\nindex: ${country.getIndexCountry()}\ntimer: ${country.getTimer()}
+        \ntotal: ${country.getTotal()}`) */
+        stores.dispatch(countriesActions.updateContCountry(index));
+      }
+      
+
+    }, 1e3)
+    const inter = Interval(0, intervalId)
+    interval = inter
+    console.log(interval)
+  }
+
+  const stopInterval = () => {
+    clearInterval(interval.getIntervalId())
   }
 
   return {
@@ -28,3 +46,5 @@ export default function Control() {
   }
 
 }
+
+export default Control()

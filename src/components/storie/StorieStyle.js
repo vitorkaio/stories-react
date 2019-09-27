@@ -21,9 +21,13 @@ export const Container = styled.div`
       color: cornflowerblue;
     }
   }
-
-
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 1rem 0;
+    flex: unset;
+  }
  
 `;
 
