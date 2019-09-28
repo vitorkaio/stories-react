@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -12,6 +12,7 @@ export const Container = styled.div`
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   background-color: white;
   z-index: 99;
+
   animation: fadeIn 1s ease-in forwards;
 
   display: flex;
@@ -72,10 +73,35 @@ export const Status = styled.div`
 
 
 export const StatusFill = styled.div`
-  width: ${props => props.value}%;
+  background: linear-gradient(to right, cornflowerblue 50%, white 50%);
+  background-size: 200% 100%;
+  /* background-position: right bottom; */
+  animation: all 10s linear;
   height: 100%;
   background-color: cornflowerblue;
+  background-position: ${props => props.active ? 'left bottom' : 'right bottom'};
 `;
+
+
+export const StatusOutFill = styled.div`
+  height: 100%;
+`;
+
+const fillerup = keyframes`
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+`;
+
+export const StatusFillUp = styled.div`
+  height: 100%;
+  background-color: #147fc3;
+  animation: ${fillerup} 9s forwards linear;
+`;
+
 
 
 export const Content = styled.div`

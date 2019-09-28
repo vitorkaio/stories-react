@@ -11,6 +11,7 @@ const BackDropWrapper = styled.div`
 	/*z-index: ${props => props.show ? 100 : -100};
 	/*visibility: ${props => props.show ? "visible" : "hidden"};*/
 	left: ${props => props.show ? "0" : "-1%"};
+	animation: fadeIn 1s ease-in forwards;
 `;
 
 const BackDrop = (props) => {

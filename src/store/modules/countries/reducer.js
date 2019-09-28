@@ -55,6 +55,11 @@ const countriesReducer = (state = countriesInitial, action) => {
           country.setCont(0)
         }
         if (country.getIndexCountry() === country.getTotal()) {
+          const cons = [...state.countries]
+          country.setCont(0)
+          country.setIndexCountry(0)
+          cons.splice(state.selectedCountry, 1, country)
+          draft.countries = [...cons]
           draft.selectedCountry = null
         }
 
