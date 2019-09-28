@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import { timerStories } from 'services/globalServices'
+import { timerStories } from 'services/globalServices';
+import { ACCENT_COLOR } from 'components/styles/colors';
+
 
 
 export const Container = styled.div`
@@ -76,12 +78,10 @@ export const Status = styled.div`
 
 
 export const StatusFill = styled.div`
-  background: linear-gradient(to right, cornflowerblue 50%, white 50%);
+  background: linear-gradient(to right, ${ACCENT_COLOR} 50%, white 50%);
   background-size: 200% 100%;
-  /* background-position: right bottom; */
-  animation: all 10s linear;
   height: 100%;
-  background-color: cornflowerblue;
+  background-color: ${ACCENT_COLOR};
   background-position: ${props => props.active ? 'left bottom' : 'right bottom'};
 `;
 
@@ -101,7 +101,7 @@ const fillerup = keyframes`
 
 export const StatusFillUp = styled.div`
   height: 100%;
-  background-color: #147fc3;
+  background-color: ${ACCENT_COLOR};
   animation: ${fillerup} ${timerStories - 1}s forwards linear;
 `;
 

@@ -31,7 +31,6 @@ const Control = () => {
 
     }, 1e3)
     interval = intervalId
-    console.log(interval)
   }
 
   const stopInterval = async () => {

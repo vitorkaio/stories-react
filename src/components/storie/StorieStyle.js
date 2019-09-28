@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ACCENT_COLOR } from 'components/styles/colors';
 
 export const Container = styled.div`
   flex: 1;
@@ -20,7 +21,7 @@ export const Container = styled.div`
   &:hover {
     animation: pulse 2s ease-in-out infinite;
     & span {
-      color: cornflowerblue;
+      color: ${ACCENT_COLOR};
     }
   }
   cursor: pointer;

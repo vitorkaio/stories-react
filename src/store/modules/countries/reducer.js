@@ -81,12 +81,7 @@ const countriesReducer = (state = countriesInitial, action) => {
           cons.splice(state.selectedCountry, 1, country)
           draft.countries = [...cons]
 
-          // Muda para o prómixo país
-          if ((state.selectedCountry + 1) < state.countries.length) {
-            draft.selectedCountry = state.selectedCountry + 1
-          }
-          else
-            draft.selectedCountry = null
+          draft.selectedCountry = null
         }
 
         else if (state.selectedCountry !== null) {

@@ -14,7 +14,6 @@ export default function UnsplashService() {
   const getImages = async (country) => {
     try {
       const page = Math.floor(Math.random() * 10) + 1 
-      console.log(page)
       const res = await unsplash.search.photos(country, page, 10)
       if (res.status === 400) {
         throw Error(null)
