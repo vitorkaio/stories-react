@@ -8,7 +8,7 @@ import ListStories from 'components/listStories/ListStories';
 import StorieModal from 'components/modais/StorieModal'
 import BackDrop from 'components/modais/BackDrop'
 
-const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry }) => {
+const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry, selectCountryImage }) => {
 
   useEffect(() => {
     countriesRequest()
@@ -26,11 +26,9 @@ const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry 
     resetCountry()
   }
 
-  /* if (selectedCountry) {
-    const country = countries[selectedCountry]
-    console.log(`cont: ${country.getCont()}\nindex: ${country.getIndexCountry()}\ntimer: ${country.getTimer()}
-    \ntotal: ${country.getTotal()}`) 
-  } */
+  const selectImageIndex = (indexImage) => {
+    selectCountryImage(indexImage)
+  }
 
   return (
     <Container>
@@ -48,7 +46,10 @@ const Home = ({ countriesReducer, countriesRequest, selectCountry, resetCountry 
         null 
         : 
         <>
-          <StorieModal country={countries[selectedCountry]} close={resetSelectCountryHandler} />
+          <StorieModal country={countries[selectedCountry]} 
+            close={resetSelectCountryHandler} 
+            selectImageIndex={selectImageIndex}
+          />
           <BackDrop show={true} closeDrawer={resetSelectCountryHandler} />
         </>
       }

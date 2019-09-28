@@ -39,8 +39,24 @@ const countriesReducer = (state = countriesInitial, action) => {
         draft.selectedCountry = action.payload.index;
       })
 
-    case typeActions.RESET_COUNTRY:
+    case typeActions.SELECT_COUNTRY_IMAGE:
       return produce(state, draft => {
+        const country = state.countries[state.selectedCountry]
+        country.setIndexCountry(action.payload.index)
+        country.setCont(0)
+        const cons = [...state.countries]
+        cons.splice(state.selectedCountry, 1, country)
+        draft.countries = [...cons]
+      })
+
+    case typeActions.RESET_COUNTRY_SUCCESS:
+      return produce(state, draft => {
+        const country = state.countries[state.selectedCountry]
+        country.setCont(0)
+        const cons = [...state.countries]
+        cons.splice(state.selectedCountry, 1, country)
+        draft.countries = [...cons]
+
         draft.selectedCountry = null;
       })
 
@@ -50,17 +66,27 @@ const countriesReducer = (state = countriesInitial, action) => {
       return produce(state, draft => {
         const country = state.countries[action.payload.indexCountry]
         country.setCont(country.getCont() + 1)
+
+        // Quando estourar o timer, muda a imagem...
         if (country.getCont() === country.getTimer()) {
           country.setIndexCountry(country.getIndexCountry() + 1)
           country.setCont(0)
         }
+
+        // Se já passou por todas as imagens, fecha os slides
         if (country.getIndexCountry() === country.getTotal()) {
           const cons = [...state.countries]
           country.setCont(0)
           country.setIndexCountry(0)
           cons.splice(state.selectedCountry, 1, country)
           draft.countries = [...cons]
-          draft.selectedCountry = null
+
+          // Muda para o prómixo país
+          if ((state.selectedCountry + 1) < state.countries.length) {
+            draft.selectedCountry = state.selectedCountry + 1
+          }
+          else
+            draft.selectedCountry = null
         }
 
         else if (state.selectedCountry !== null) {

@@ -3,7 +3,7 @@ import { Container, Header, Content, HeaderTitle, HeaderStatus, Status, StatusFi
 import { MdClose } from 'react-icons/md';
 import { translate } from 'services/translate';
 
-export default function StorieModal({ country, close }) {
+export default function StorieModal({ country, close, selectImageIndex }) {
 
   const name = country.getNameCountry()
 
@@ -12,7 +12,7 @@ export default function StorieModal({ country, close }) {
     for (let index = 0; index < country.getTotal(); index++) {
       // console.log(country.getIndexCountry())
       lis.push(
-        <Status key={index}>
+        <Status key={index} onClick={() => selectImageIndex(index)} >
           { 
             country.getIndexCountry() === index
             ?

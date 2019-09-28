@@ -1,9 +1,10 @@
 import { combineEpics } from 'redux-observable';
-import { countryEpic, selectCountryEpic } from './countries/epics';
+import { countryEpic, selectCountryEpic, resetCountryEpic } from './countries/epics';
 
 const epics = [
   countryEpic,
-  selectCountryEpic
+  selectCountryEpic,
+  resetCountryEpic
 ];
 
 const epicsRoots = combineEpics(...epics);

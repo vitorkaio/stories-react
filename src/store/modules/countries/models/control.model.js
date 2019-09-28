@@ -1,5 +1,4 @@
 // Gerencia os interval
-import Interval from './interval.model'
 import stores from 'store/store';
 import * as countriesActions from 'store/modules/countries/actions'
 
@@ -17,7 +16,7 @@ const Control = () => {
     return false
   }
 
-  const startInterval = () => {
+  const startInterval = async () => {
     const intervalId = setInterval(() => {
 
       // Verifica se fechou
@@ -31,13 +30,12 @@ const Control = () => {
       
 
     }, 1e3)
-    const inter = Interval(0, intervalId)
-    interval = inter
+    interval = intervalId
     console.log(interval)
   }
 
-  const stopInterval = () => {
-    clearInterval(interval.getIntervalId())
+  const stopInterval = async () => {
+    clearInterval(interval)
   }
 
   return {

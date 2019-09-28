@@ -11,6 +11,8 @@ export const Container = styled.div`
   justify-content: flex-end;
   align-items: center;
 
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 
   /* animation: zoomIn 1s ease-out forwards; */

@@ -2,7 +2,7 @@ import { filter, mergeMap } from 'rxjs/operators';
 import * as typeActions from './typeActions';
 import * as countriesActions from './actions';
 import UnsplashService from 'services/unplashService.js'
-import { listCountries } from './models/constants'
+import { listCountries, randomImages } from './models/constants'
 import Country from './models/country.model'
 import stores from 'store/store';
 import Control from './models/control.model';
@@ -17,13 +17,13 @@ export const countryEpic = (action$, _) => action$.pipe(
       const unsplashService = UnsplashService()
       // const countries = await unsplashService.getImages('costa rica')
       const countries = []
-      for (let item in listCountries) {
+      const allCountries = listCountries(4)
+      for (let item in allCountries) {
         const country = Country()
-        const res = await unsplashService.getImages(listCountries[item])
-        const subrt = Math.floor(Math.random() * 4) + 2 
+        const res = await unsplashService.getImages(allCountries[item])
 
-        country.setNameCountry(listCountries[item])
-        country.setListImgs(res.splice(0, subrt))
+        country.setNameCountry(allCountries[item])
+        country.setListImgs(randomImages([...res]))
         country.setTotal(country.getListImgs().length)
 
         countries.push(country)
@@ -44,10 +44,21 @@ export const selectCountryEpic = (action$, _) => action$.pipe(
   mergeMap(async (action) => {
     const { payload } = action
     const country = stores.getState().countriesReducer.countries[payload.index]
-    Control.startInterval(country)
+    await Control.startInterval(country)
 
 
     return countriesActions.selectCountrySuccess(payload.index)
+  }),
+);
+
+
+// ***************************** STOP CONTROL *****************************
+export const resetCountryEpic = (action$, _) => action$.pipe(
+  filter(action => action.type === typeActions.RESET_COUNTRY),
+  // `mergeMap()` supports functions that return promises, as well as observables
+  mergeMap(async (_) => {
+    await Control.stopInterval()
+    return countriesActions.resetCountrySuccess()
   }),
 );
 

@@ -1,4 +1,6 @@
 import styled, { keyframes } from 'styled-components';
+import { timerStories } from 'services/globalServices'
+
 
 export const Container = styled.div`
   position: fixed;
@@ -69,6 +71,7 @@ export const Status = styled.div`
   border-radius: 5px;
   overflow-x: hidden;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
 `;
 
 
@@ -99,7 +102,7 @@ const fillerup = keyframes`
 export const StatusFillUp = styled.div`
   height: 100%;
   background-color: #147fc3;
-  animation: ${fillerup} 9s forwards linear;
+  animation: ${fillerup} ${timerStories - 1}s forwards linear;
 `;
 
 
