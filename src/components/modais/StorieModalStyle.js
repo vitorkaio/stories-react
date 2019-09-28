@@ -52,29 +52,37 @@ export const HeaderTitle = styled.div`
 
 export const HeaderStatus = styled.div`
   flex: 1;
-  background-color: cornsilk;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 `;
 
 
 export const Status = styled.div`
   width: 100px;
-  height: 10px;
+  height: 5px;
 
-  border: 1px solid black;
+  margin: 0 0.5rem;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  overflow-x: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 `;
 
 
 export const StatusFill = styled.div`
   width: ${props => props.value}%;
   height: 100%;
-  background-color: coral;
+  background-color: cornflowerblue;
 `;
 
 
 export const Content = styled.div`
   flex: 5;
+  width: 100%;
+  background: url(${props => props.url});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 `;
