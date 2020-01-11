@@ -1,5 +1,6 @@
 import * as typeActions from './typeActions';
 import { produce } from 'immer';
+import Control from './models/control.model';
 
 const countriesInitial = {
   countries: [],
@@ -81,10 +82,18 @@ const countriesReducer = (state = countriesInitial, action) => {
           cons.splice(state.selectedCountry, 1, country)
           draft.countries = [...cons]
 
-          draft.selectedCountry = null
+          // Muda para o prómixo país
+          if ((state.selectedCountry + 1) < state.countries.length) {
+            Control.stopInterval()
+            draft.selectedCountry = state.selectedCountry + 1
+            Control.startInterval()
+          }
+          else {
+            draft.selectedCountry = null
+          }
         }
 
-        else if (state.selectedCountry !== null) {
+        if (state.selectedCountry !== null) {
           // draft.countries.splice(state.selectedCountry, 1, country)
           const cons = [...state.countries]
           cons.splice(state.selectedCountry, 1, country)

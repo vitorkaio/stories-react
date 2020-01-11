@@ -33,7 +33,7 @@ const Control = () => {
     interval = intervalId
   }
 
-  const stopInterval = async () => {
+  const stopInterval = () => {
     clearInterval(interval)
   }
 
