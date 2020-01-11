@@ -86,7 +86,6 @@ const countriesReducer = (state = countriesInitial, action) => {
           if ((state.selectedCountry + 1) < state.countries.length) {
             Control.stopInterval()
             draft.selectedCountry = state.selectedCountry + 1
-            console.log(state.countries[draft.selectedCountry].getIndexCountry())
             Control.startInterval()
           }
           else {
